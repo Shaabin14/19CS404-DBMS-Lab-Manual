@@ -105,123 +105,217 @@ CREATE TABLE Table_Name (
 
 **Question 1**
 --
--- Paste Question 1 here
+Insert a record with EmployeeID 001, Name Sarah Parker, Position Manager, Department HR, and Salary 60000 into the Employee table.
+
 
 ```sql
--- Paste your SQL code below for Question 1
+insert into Employee(EmployeeID,Name,Position,Department,Salary)values(001,"Sarah Parker","Manager","HR",60000)
 ```
 
 **Output:**
 
-![Output1](output.png)
+<img width="1221" height="313" alt="image" src="https://github.com/user-attachments/assets/6bd31510-8321-4c95-9727-9d1a8ec3757f" />
+
 
 **Question 2**
 ---
--- Paste Question 2 here
+Create a table named Employees with the following columns:
+
+EmployeeID as INTEGER
+FirstName as TEXT
+LastName as TEXT
+HireDate as DATE
 
 ```sql
--- Paste your SQL code below for Question 2
+Create table Employees
+(
+EmployeeID INTEGER,
+FirstName TEXT,
+LastName TEXT,
+HireDate DATE
+);
 ```
 
 **Output:**
 
-![Output2](output.png)
+<img width="1218" height="383" alt="image" src="https://github.com/user-attachments/assets/dac1dccd-28b3-4d22-a580-70b58fd8c358" />
+
 
 **Question 3**
 ---
--- Paste Question 3 here
+Create a table named Invoices with the following constraints:
+InvoiceID as INTEGER should be the primary key.
+InvoiceDate as DATE.
+Amount as REAL should be greater than 0.
+DueDate as DATE should be greater than the InvoiceDate.
+OrderID as INTEGER should be a foreign key referencing Orders(OrderID).
 
 ```sql
--- Paste your SQL code below for Question 3
+Create table Invoices
+(
+InvoiceID INTEGER primary key,
+InvoiceDate DATE,
+Amount REAL check(Amount > 0),
+DueDate DATE check(DueDate > InvoiceDate),
+OrderID INTEGER,
+foreign key(OrderID) references Orders(OrderID));
 ```
 
 **Output:**
 
-![Output3](output.png)
+<img width="1223" height="356" alt="image" src="https://github.com/user-attachments/assets/d608b770-a347-4ba6-a123-d88db4bd7e60" />
+
 
 **Question 4**
 ---
--- Paste Question 4 here
+In the Cusomers table, insert a record where some fields are NULL, another record where all fields are filled without any NULL values, and a third record where some fields are filled, and others are left as NULL.
+
+CustomerID  Name          Address      City        ZipCode
+----------  ------------  ----------   ----------  ----------
+306         Diana Prince  Themyscira
+307         Bruce Wayne   Wayne Manor  Gotham      10007
+308         Peter Parker  Queens                   11375
 
 ```sql
--- Paste your SQL code below for Question 4
+insert into Customers(CustomerID,Name,Address,City,ZipCode)values(306,"Diana Prince","Themyscira",NULL,NULL),(307,"Bruce Wayne","Wayne Mano","Gotham",10007),(308,"Peter Parker","Queens",NULL,11375)
+
 ```
 
 **Output:**
 
-![Output4](output.png)
+<img width="1219" height="342" alt="image" src="https://github.com/user-attachments/assets/2439e5fa-6ef9-4379-b05b-6041a04f550a" />
+
 
 **Question 5**
 ---
--- Paste Question 5 here
+Create a new table named item with the following specifications and constraints:
+item_id as TEXT and as primary key.
+item_desc as TEXT.
+rate as INTEGER.
+icom_id as TEXT with a length of 4.
+icom_id is a foreign key referencing com_id in the company table.
+The foreign key should set NULL on updates and deletes.
+item_desc and rate should not accept NULL.
 
 ```sql
--- Paste your SQL code below for Question 5
+Create table item
+(
+item_id TEXT primary key,
+item_desc TEXT not NULL,
+rate INTEGER not NULL,
+icom_id TEXT check(length(icom_id = 4)),
+foreign key(icom_id) references company(com_id)ON UPDATE SET NULL ON DELETE SET NULL);
 ```
 
 **Output:**
 
-![Output5](output.png)
+<img width="1222" height="427" alt="image" src="https://github.com/user-attachments/assets/b99c40d5-071e-41b0-9858-e45d61f606a9" />
+
 
 **Question 6**
 ---
--- Paste Question 6 here
+Create a table named Shipments with the following constraints:
+ShipmentID as INTEGER should be the primary key.
+ShipmentDate as DATE.
+SupplierID as INTEGER should be a foreign key referencing Suppliers(SupplierID).
+OrderID as INTEGER should be a foreign key referencing Orders(OrderID).
 
 ```sql
--- Paste your SQL code below for Question 6
+Create table Shipments
+(
+ShipmentID INTEGER primary key,
+ShipmentDate DATE,
+SupplierID INTEGER,
+OrderID INTEGER,
+foreign key(SupplierID) references Suppliers(SupplierID),
+foreign key(OrderID) references Orders(OrderID));
 ```
 
 **Output:**
 
-![Output6](output.png)
+<img width="1222" height="309" alt="image" src="https://github.com/user-attachments/assets/85c9618c-40a5-4301-acc1-3e931ad53cf4" />
+
+
 
 **Question 7**
 ---
--- Paste Question 7 here
+Create a table named Bonuses with the following constraints:
+BonusID as INTEGER should be the primary key.
+EmployeeID as INTEGER should be a foreign key referencing Employees(EmployeeID).
+BonusAmount as REAL should be greater than 0.
+BonusDate as DATE.
+Reason as TEXT should not be NULL.
 
 ```sql
--- Paste your SQL code below for Question 7
+Create table Bonuses
+(
+BonusID INTEGER primary key,
+EmployeeID INTEGER,
+BonusAmount REAL check(BonusAmount > 0),
+BonusDate Date,
+Reason TEXT not NULL,
+foreign key(EmployeeID) references Employees(EmployeeID));
 ```
 
 **Output:**
 
-![Output7](output.png)
+<img width="1217" height="354" alt="image" src="https://github.com/user-attachments/assets/67ed1765-6bb5-4c04-998e-d7dafb3f223e" />
+
 
 **Question 8**
 ---
--- Paste Question 8 here
+Insert all employees from Former_employees into Employee
+
+Table attributes are EmployeeID, Name, Department, Salary
+
+
 
 ```sql
--- Paste your SQL code below for Question 8
+insert into Employee(EmployeeID,Name,Department,Salary) select EmployeeID,Name,Department,Salary from Former_employees
 ```
 
 **Output:**
 
-![Output8](output.png)
+<img width="1226" height="338" alt="image" src="https://github.com/user-attachments/assets/3e4bdb69-50f4-4bf2-abb0-8c95b23f76cc" />
+
 
 **Question 9**
 ---
--- Paste Question 9 here
+Create a table named Invoices with the following constraints:
+
+InvoiceID as INTEGER should be the primary key.
+InvoiceDate as DATE.
+DueDate as DATE should be greater than the InvoiceDate.
+Amount as REAL should be greater than 0.
 
 ```sql
--- Paste your SQL code below for Question 9
+Create table Invoices
+(
+InvoiceID INTEGER primary key,
+InvoiceDate DATE,
+DueDate DATE check(DueDate > InvoiceDate),
+Amount REAL check(Amount > 0));
 ```
 
 **Output:**
 
-![Output9](output.png)
+<img width="1210" height="345" alt="image" src="https://github.com/user-attachments/assets/872d1d0e-0775-411a-afc3-94a77a75fe92" />
+
 
 **Question 10**
 ---
--- Paste Question 10 here
+Write a SQL query to add a column named Date_of_birth as Date in the Student_details table.
 
 ```sql
--- Paste your SQL code below for Question 10
+ALTER TABLE Student_details
+add column Date_of_birth Date
 ```
 
 **Output:**
 
-![Output10](output.png)
+<img width="1217" height="426" alt="image" src="https://github.com/user-attachments/assets/f0ab3968-70f8-4c69-b6d1-a3ad14b8d4e2" />
+**Output:**
+<img width="1902" height="1073" alt="Screenshot 2025-10-10 111804" src="https://github.com/user-attachments/assets/2e994fa4-84d6-46e2-9904-1913610f7274" />
 
 
 ## RESULT
